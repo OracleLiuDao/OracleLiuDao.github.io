@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://ora.coding.me</id>
+    <id>https://OracleLiuDao.github.io</id>
     <title>神谕六道</title>
-    <updated>2020-04-10T12:29:16.680Z</updated>
+    <updated>2020-04-10T12:46:11.495Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://ora.coding.me"/>
-    <link rel="self" href="https://ora.coding.me/atom.xml"/>
+    <link rel="alternate" href="https://OracleLiuDao.github.io"/>
+    <link rel="self" href="https://OracleLiuDao.github.io/atom.xml"/>
     <subtitle>觉得不如意的时候，有人过得比你更惨。</subtitle>
-    <logo>https://ora.coding.me/images/avatar.png</logo>
-    <icon>https://ora.coding.me/favicon.ico</icon>
+    <logo>https://OracleLiuDao.github.io/images/avatar.png</logo>
+    <icon>https://OracleLiuDao.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, 神谕六道</rights>
     <entry>
         <title type="html"><![CDATA[为什么我不推荐学Python去找工作?为什么只会Python很难找到工作?]]></title>
-        <id>https://ora.coding.me/post/hello-world/</id>
-        <link href="https://ora.coding.me/post/hello-world/">
+        <id>https://OracleLiuDao.github.io/post/hello-world/</id>
+        <link href="https://OracleLiuDao.github.io/post/hello-world/">
         </link>
         <updated>2020-03-26T23:48:18.000Z</updated>
-        <content type="html"><![CDATA[<p><img src="https://ora.coding.me/post-images/1585266622241.jpg" alt="" loading="lazy"><br>
+        <content type="html"><![CDATA[<p><img src="https://OracleLiuDao.github.io/post-images/1585266622241.jpg" alt="" loading="lazy"><br>
 不得不说Python目前是一个很热门的编程语言,但是热门不见得好找工作,用Python写一点小脚本,自动化的工具很有用.<br>
 Python涉及的领域:<br>
 AI 人工智能, 机器学习算法领域.😀<br>
@@ -32,8 +32,8 @@ Python也就是做做公司里面的某些辅助系统<br>
     </entry>
     <entry>
         <title type="html"><![CDATA[Hello Gridea]]></title>
-        <id>https://ora.coding.me/post/hello-gridea/</id>
-        <link href="https://ora.coding.me/post/hello-gridea/">
+        <id>https://OracleLiuDao.github.io/post/hello-gridea/</id>
+        <link href="https://OracleLiuDao.github.io/post/hello-gridea/">
         </link>
         <updated>2018-12-11T16:00:00.000Z</updated>
         <summary type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
