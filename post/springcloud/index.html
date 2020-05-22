@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://oracleliudao.github.io/favicon.ico?v=1586587401111">
+<link rel="shortcut icon" href="https://oracleliudao.github.io/favicon.ico?v=1590150283321">
 <link rel="stylesheet" href="https://oracleliudao.github.io/styles/main.css">
 
 
@@ -29,7 +29,7 @@
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://oracleliudao.github.io">
-        <img src="https://oracleliudao.github.io/images/avatar.png?v=1586587401111" class="site-logo">
+        <img src="https://oracleliudao.github.io/images/avatar.png?v=1590150283321" class="site-logo">
         <h1 class="site-title">神谕六道</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -256,6 +256,86 @@ calss DeptController{
 }
 </code></pre>
 <h2 id="9主启动类deptprovider8001_app">9.主启动类DeptProvider8001_App</h2>
+<h2 id="10创建一个消费者microservicecloud-consumer-dept-80">10.创建一个消费者microservicecloud-consumer-dept-80</h2>
+<p>​    先导入依赖 : 自定义的api(dept) 提供者和消费者都需要用到dept这个实体类,所以抽取放到通用的api最合适</p>
+<p>​	start-web/热部署 devtools</p>
+<p>配置yml :</p>
+<pre><code class="language-xml">server:
+  port: 80
+</code></pre>
+<p>创建一个config配置类</p>
+<pre><code class="language-java">@Configuration
+public class Config{  //等价于applicationContext.xml配置文件
+    &lt;bean id=&quot;userService&quot; class=&quot;com.liudao.userServiceImpl&quot;&gt;
+     这里这样写
+        @Bean
+        public UserService getUserService(){
+        	return new UserServiceImpl();
+    }
+    
+    public RestTemplate getRestTemplate(){
+        return new RrstTemplate();
+    }
+}
+</code></pre>
+<p>创建controller层创建DeptController_Consumer</p>
+<pre><code class="language-java">url请求地址,请求参数,HTTP响应被转换的类型
+@RsetController
+public class DeptController_Consumer{
+    private static final String REST_URL_PREFIX = &quot;https:localhost:8001&quot;;
+    //消费者没有service层
+    @AutoWrite
+    private RestTemplate restTemplate;
+    @RequestMapping(value=&quot;/consumer/dept/add&quot;)
+   	public boolean add(Dept dept){
+     return restTemplate.PostForObject(REST_URL_PREFIX+&quot;/dept/add&quot;,dept,Boolean.class)
+    }
+     @RequestMapping(value=&quot;/consumer/dept/findDeptById/{id}&quot;)
+   	public Dept add(@pathVariable(&quot;id&quot;) Long id){
+     return restTemplate.GetForObject(REST_URL_PREFIX+&quot;/dept/findDeptById&quot;+id,Dept.class)
+    }      
+}
+</code></pre>
+<p>11.启动类DeptConsumer80_APP</p>
+<h1 id="eureka">Eureka</h1>
+<p>服务注册与发现</p>
+<h2 id="1导入依赖配置applicationxml-启动类enableeurekaservcer">1.导入依赖,配置application.xml ,启动类(@EnableEurekaServcer)</h2>
+<pre><code class="language-xml">server:
+  port: 7001
+eureka:
+ instance:
+  hostname: localhost
+ client:
+   register-write-eureka: flase //表示不向注册中心注册自己
+   fetch-register: flase //表示自己就是注册中心,不需要检索
+   service-url:
+     defaultZone: http://${eurka.instance.hostname}:${server.port}/eureka/
+		设置Eureka server交互地址查询服务和注册服务都需要依赖这个地址
+</code></pre>
+<h2 id="2在provider中导入依赖-start-eurekastart-config">2.在provider中导入依赖 start-eureka/start-config</h2>
+<h2 id="3配置provider中的applicationxml文件">3.配置provider中的application.xml文件</h2>
+<pre><code class="language-xml">eureka:
+  client:  #客户端注册进eureka服务列表内
+	server-url:
+		defaultZone: http://localhost:7001/eureka
+</code></pre>
+<h2 id="4配置provider的主启动类的注解enableeurekaclient表示服务启动后会自动注册进eureka服务中">4.配置provider的主启动类的注解@EnableEurekaClient表示服务启动后会自动注册进Eureka服务中</h2>
+<h2 id="5主机映射名的修改eureka优化">5.主机映射名的修改(Eureka优化)</h2>
+<p>只需要在provider中的application.xml中添加</p>
+<p>insatance:</p>
+<p>​    instance-id: micorservicecloud-dept8001</p>
+<h2 id="增加访问路径可以显示ip地址">//增加访问路径可以显示Ip地址</h2>
+<p>​     prefer-ip-address: true</p>
+<h2 id="微服务info内容的完善">微服务info内容的完善</h2>
+<p>添加依赖  start-actuator</p>
+<h2 id="6自我保护机制90心跳连接">6.自我保护机制(90心跳连接)</h2>
+<h2 id="7服务的发现">7.服务的发现</h2>
+<p>让消费者发现我们的在euecka中注册的服务</p>
+<h2 id="8eureka集群配置">8.eureka集群配置</h2>
+<h1 id="硬件推荐">硬件推荐</h1>
+<p>竖屏显示器：明基 BenQ Bl2480T 特点：在同等价位里调节灵活，VGA,HDMI,DP接口都有，并且兼有BI智慧调光能自动调光和升暗部细节 价格1200元 ，你们值得拥有 现在参考价 1149  23.8英寸 分辨率1920x1080<br>
+键盘：阿米洛机械键盘茶轴无线 参考价:479元 兼容mac和windows<br>
+键盘:苹果magic keyboard 参考价:<strong>728</strong></p>
 
             </div>
             
